@@ -1,8 +1,14 @@
-# Humanizer
-
-[![skills.sh installs](https://skills.sh/b/blader/humanizer)](https://skills.sh/blader/humanizer)
+# Humanizer (RU fork)
 
 A portable agent skill that removes signs of AI-generated writing from text, making it sound more natural and human. It is plain Markdown, so it can run in any harness that supports skill-style instructions.
+
+This is a fork of [blader/humanizer](https://github.com/blader/humanizer) (v2.9.1) that adds a **Russian-language pattern set**. The upstream skill is written entirely for English text; this fork keeps all 33 upstream patterns intact and adds:
+
+- **16 паттернов русского AI-текста (RU-1 – RU-16)** с примерами «до/после»: канцелярские вводные («стоит отметить»), «является»/«представляет собой», «играет ключевую роль», «данный», номинализация («осуществление проведения»), нанизывание причастных оборотов, русский AI-словарь («уникальный», «инновационный», «погрузиться»), «не только..., но и...», зачины про «современный мир», пафосные финалы с «таким образом», размытые «эксперты считают», артефакты чат-бота, избыточное хеджирование, фразы-анонсы («давайте разберёмся»), ложные диапазоны и правило трёх.
+- **Language Routing**: правило выбора паттернов по языку текста. Для русского текста отключены английские правила про длинное тире (§14) и фигурные кавычки (§19) — в русской типографике тире и «ёлочки» являются нормой, и их удаление делает текст *менее* человеческим.
+- **Русский список ложных срабатываний**: тире, «ёлочки», официально-деловой стиль в документах и другие вещи, которые нельзя принимать за теллы.
+
+English text is handled exactly as in upstream.
 
 ## Installation
 
@@ -11,7 +17,7 @@ A portable agent skill that removes signs of AI-generated writing from text, mak
 Install globally with the cross-agent skills CLI so Humanizer is available in every project:
 
 ```bash
-npx skills add blader/humanizer --global
+npx skills add Asandress/humanizer-ru --global
 ```
 
 Update an existing install:
@@ -23,13 +29,13 @@ npx skills update humanizer --global
 To install globally into every supported agent harness:
 
 ```bash
-npx skills add blader/humanizer --global --agent '*'
+npx skills add Asandress/humanizer-ru --global --agent '*'
 ```
 
 To target one configured harness, pass its agent name:
 
 ```bash
-npx skills add blader/humanizer --global --agent <agent-name>
+npx skills add Asandress/humanizer-ru --global --agent <agent-name>
 ```
 
 Omit `--global` for a project-local install that can be committed and shared with collaborators. Start a new agent session or reload skills after installation.
@@ -39,7 +45,7 @@ Omit `--global` for a project-local install that can be committed and shared wit
 Claude Code users can also install Humanizer as a plugin:
 
 ```
-/plugin marketplace add blader/humanizer
+/plugin marketplace add Asandress/humanizer-ru
 /plugin install humanizer@humanizer
 ```
 
@@ -52,7 +58,7 @@ Any agent harness can use the skill directly because the runtime artifact is `SK
 For example:
 
 ```bash
-git clone https://github.com/blader/humanizer.git /path/to/your/skills/humanizer
+git clone https://github.com/Asandress/humanizer-ru.git /path/to/your/skills/humanizer
 ```
 
 Or, if you already have this repo cloned:
@@ -207,6 +213,7 @@ Rewrites follow a no-fabrication rule: they never add facts, names, dates, or ci
 
 ## Version History
 
+- **2.9.1+ru.1.0** (fork) - Added the Russian-language pattern set RU-1 – RU-16 with before/after examples, a Language Routing section, and Russian false-positive guidance (em dashes and «ёлочки» are standard Russian typography and are not treated as tells). All 33 upstream patterns unchanged.
 - **2.9.1** - Improved distribution and portability: removed nonportable frontmatter and tool preapprovals, made global installation the documented default, added package validation, and removed the duplicated long-form example from the runtime prompt. No change to the 33 patterns.
 - **2.9.0** - Added a no-fabrication rule: rewrites may not invent facts, names, dates, or citations not present in the source, and every example that modeled invented specifics was re-cut to use only source information (fixes #187). Replaced paragraph-count parity with an information-over-shape rule, made a user's voice sample outrank the em dash ban, and added invocation modes (pasted text / file / embedded). No change to the 33 patterns.
 - **2.8.3** - Moved the skill version from the unsupported top-level frontmatter key to `metadata.version` for Agent Skills and Claude compatibility. No change to the 33 patterns.
