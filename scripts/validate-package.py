@@ -34,7 +34,7 @@ skill_version = require(
     "SKILL.md metadata.version is missing",
 ).group(1)
 readme_version = require(
-    re.search(r"(?m)^- \*\*([0-9]+\.[0-9]+\.[0-9]+)\*\*", README),
+    re.search(r"(?m)^- \*\*([0-9]+\.[0-9]+\.[0-9]+(?:\+ru\.[0-9.]+)?)\*\*", README),
     "README version history is missing",
 ).group(1)
 
@@ -55,7 +55,8 @@ readme_numbers = {
 if readme_numbers != set(range(1, 34)):
     raise SystemExit("README pattern table must contain patterns 1-33")
 
-if len(SKILL.splitlines()) > 500:
-    raise SystemExit("SKILL.md exceeds the 500-line portability budget")
+# RU fork: budget raised to fit the Russian pattern section (RU-1..RU-16)
+if len(SKILL.splitlines()) > 650:
+    raise SystemExit("SKILL.md exceeds the 650-line portability budget")
 
 print(f"Humanizer package v{skill_version} is valid")
