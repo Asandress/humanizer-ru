@@ -2,15 +2,15 @@
   "$schema": "https://json.schemastore.org/claude-code-marketplace-manifest.json",
   "name": "humanizer",
   "owner": {
-    "name": "blader",
-    "url": "https://github.com/blader"
+    "name": "Asandress",
+    "url": "https://github.com/Asandress"
   },
   "description": "The humanizer skill, installable as a Claude Code plugin.",
   "plugins": [
     {
       "name": "humanizer",
       "source": "./",
-      "description": "Remove signs of AI-generated writing from text, making it sound more natural and human. Based on Wikipedia's \"Signs of AI writing\" guide.",
+      "description": "Remove signs of AI-generated writing from text, making it sound more natural and human. Based on Wikipedia's \"Signs of AI writing\" guide. Includes a Russian-language pattern set (RU fork).",
       "license": "MIT",
       "keywords": ["writing", "editing", "ai-detection", "humanize", "prose", "style"]
     }
